@@ -1,18 +1,10 @@
-import { useState } from 'react'
-
-export function Card({ addToFavorites, game }) {
-  const [isFavorite, setIsFavorite] = useState(false)
-  const [isPlayed, setIsPlayed] = useState(false)
-
-  const isFavoriteHandle = () => {
-    setIsFavorite(!isFavorite)
-    addToFavorites(game)
-  }
-
-  const isPlayedHandle = () => {
-    setIsPlayed(!isPlayed)
-  }
-
+export function Card({
+  game,
+  addToFavorites,
+  addToPlayed,
+  isInPlayed,
+  isInFavorites,
+}) {
   return (
     <div className="card">
       <div className="card-image">
@@ -20,8 +12,12 @@ export function Card({ addToFavorites, game }) {
       </div>
       <h2>{game.name}</h2>
       <div className="card-action">
-        <button onClick={isFavoriteHandle}>{isFavorite ? '🩷' : '💔'}</button>
-        <button onClick={isPlayedHandle}>{isPlayed ? '✅' : '❎'}</button>
+        <button onClick={() => addToFavorites(game)}>
+          {isInFavorites(game) ? '🩷' : '💔'}
+        </button>
+        <button onClick={() => addToPlayed(game)}>
+          {isInPlayed(game) ? '✅' : '❎'}
+        </button>
       </div>
     </div>
   )
