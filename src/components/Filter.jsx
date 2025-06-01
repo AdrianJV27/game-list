@@ -1,4 +1,4 @@
-export function Filter({ setFilter }) {
+export function Filter({ filter, setFilter }) {
   return (
     <nav className="filter">
       <div className="filter-search">
@@ -11,9 +11,24 @@ export function Filter({ setFilter }) {
         </form>
       </div>
       <div className="filter-actions">
-        <span onClick={() => setFilter('all')}>Todos</span>
-        <span onClick={() => setFilter('favorites')}>Favoritos</span>
-        <span onClick={() => setFilter('played')}>Jugados</span>
+        <span
+          className={filter === 'all' ? 'active' : ''}
+          onClick={() => setFilter('all')}
+        >
+          Todos
+        </span>
+        <span
+          className={filter === 'favorites' ? 'active' : ''}
+          onClick={() => setFilter('favorites')}
+        >
+          Favoritos
+        </span>
+        <span
+          className={filter === 'played' ? 'active' : ''}
+          onClick={() => setFilter('played')}
+        >
+          Jugados
+        </span>
       </div>
     </nav>
   )

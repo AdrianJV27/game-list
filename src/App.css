@@ -90,6 +90,11 @@ header h1 {
   font-size: 20px;
   transition: 0.3s;
 }
+
+.filter-actions span.active {
+  color: rgb(117, 198, 255);
+}
+
 .filter-actions span:hover {
   transform: scale(1.2);
 }

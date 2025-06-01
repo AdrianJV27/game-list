@@ -37,7 +37,7 @@ function App() {
     <>
       <Header />
       <main>
-        <Filter setFilter={setFilter} />
+        <Filter filter={filter} setFilter={setFilter} />
         <CardSection
           gameList={gameList}
           addToFavorites={addToFavorites}
