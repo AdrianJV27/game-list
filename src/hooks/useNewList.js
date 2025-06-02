@@ -12,8 +12,10 @@ export function useNewList() {
       setNewList((prevValue) => prevValue.filter((item) => item.id !== game.id))
     }
   }
+
   return {
     newList,
+    setNewList,
     isInNewList,
     addToNewList,
   }
