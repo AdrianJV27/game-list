@@ -5,7 +5,7 @@ export function useNewList() {
 
   const isInNewList = (game) => newList.find((item) => item.id === game.id)
 
-  const addToNewList = (game) => {
+  const toggleNewList = (game) => {
     if (!isInNewList(game)) {
       setNewList((prevValue) => [...prevValue, game])
     } else {
@@ -17,6 +17,6 @@ export function useNewList() {
     newList,
     setNewList,
     isInNewList,
-    addToNewList,
+    toggleNewList,
   }
 }

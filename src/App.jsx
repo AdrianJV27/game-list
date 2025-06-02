@@ -1,7 +1,7 @@
 import './App.css'
 import { Header } from './components/Header'
 import { CardSection } from './components/CardSection'
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import games from './mocks/games.json'
 import { Filter } from './components/Filter'
 import { useNewList } from './hooks/useNewList'
@@ -15,19 +15,19 @@ const GAME_LIST_OPTIONS = {
 function App() {
   const allGamesList = games.results.slice(0, 10)
   const [filter, setFilter] = useState('all')
-
+  const isAllSection = useRef(true)
   const {
     newList: favoritesList,
     isInNewList: isInFavorites,
     setNewList: setFavorites,
-    addToNewList: addToFavorites,
+    toggleNewList: toggleFavorites,
   } = useNewList()
 
   const {
     newList: playedList,
     isInNewList: isInPlayed,
     setNewList: setPlayed,
-    addToNewList: addToPlayed,
+    toggleNewList: togglePlayed,
   } = useNewList()
 
   usePersistantList('favoritesList', favoritesList, setFavorites)
@@ -36,10 +36,13 @@ function App() {
   const gameList = useMemo(() => {
     switch (filter) {
       case GAME_LIST_OPTIONS.FAVORITES:
+        isAllSection.current = false
         return favoritesList
       case GAME_LIST_OPTIONS.PLAYED:
+        isAllSection.current = false
         return playedList
       default:
+        isAllSection.current = true
         return allGamesList
     }
   }, [filter, favoritesList, playedList, allGamesList])
@@ -47,12 +50,14 @@ function App() {
   return (
     <>
       <Header />
+
       <main>
         <Filter filter={filter} setFilter={setFilter} />
         <CardSection
           gameList={gameList}
-          addToFavorites={addToFavorites}
-          addToPlayed={addToPlayed}
+          isAllSection={isAllSection}
+          toggleFavorites={toggleFavorites}
+          togglePlayed={togglePlayed}
           isInPlayed={isInPlayed}
           isInFavorites={isInFavorites}
         />

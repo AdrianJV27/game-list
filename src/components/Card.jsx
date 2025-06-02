@@ -1,7 +1,7 @@
 export function Card({
   game,
-  addToFavorites,
-  addToPlayed,
+  toggleFavorites,
+  togglePlayed,
   isInPlayed,
   isInFavorites,
 }) {
@@ -12,10 +12,10 @@ export function Card({
       </div>
       <h2>{game.name}</h2>
       <div className="card-action">
-        <button onClick={() => addToFavorites(game)}>
+        <button onClick={() => toggleFavorites(game)}>
           {isInFavorites(game) ? '🩷' : '💔'}
         </button>
-        <button onClick={() => addToPlayed(game)}>
+        <button onClick={() => togglePlayed(game)}>
           {isInPlayed(game) ? '✅' : '❎'}
         </button>
       </div>
