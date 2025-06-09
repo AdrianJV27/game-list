@@ -8,7 +8,7 @@ export function Card({
   return (
     <div className="card">
       <div className="card-image">
-        <img src={game.background_image} alt="" />
+        <img src={game.image} alt="" />
       </div>
       <h2>{game.name}</h2>
       <div className="card-action">

@@ -1,3 +1,5 @@
+import { GAME_LIST_OPTIONS } from '../constants/filter'
+
 export function Filter({ filter, setFilter }) {
   return (
     <nav className="filter">
@@ -13,19 +15,19 @@ export function Filter({ filter, setFilter }) {
       <div className="filter-actions">
         <span
           className={filter === 'all' ? 'active' : ''}
-          onClick={() => setFilter('all')}
+          onClick={() => setFilter(GAME_LIST_OPTIONS.ALL)}
         >
           Todos
         </span>
         <span
           className={filter === 'favorites' ? 'active' : ''}
-          onClick={() => setFilter('favorites')}
+          onClick={() => setFilter(GAME_LIST_OPTIONS.FAVORITES)}
         >
           Favoritos
         </span>
         <span
           className={filter === 'played' ? 'active' : ''}
-          onClick={() => setFilter('played')}
+          onClick={() => setFilter(GAME_LIST_OPTIONS.PLAYED)}
         >
           Jugados
         </span>
