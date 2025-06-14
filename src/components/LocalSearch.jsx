@@ -1,3 +1,5 @@
+import { preventDef } from '../services/preventDefault'
+
 export function LocalSearch({ search, setSearch }) {
   const handleChange = (e) => {
     const newSearch = e.target.value
@@ -5,11 +7,7 @@ export function LocalSearch({ search, setSearch }) {
   }
   return (
     <section className="local-search">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-        }}
-      >
+      <form onSubmit={preventDef}>
         <input
           placeholder="Minecraft, Tetris, Half Life..."
           onChange={handleChange}

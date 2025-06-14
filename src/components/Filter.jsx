@@ -1,11 +1,34 @@
+import { useRef } from 'react'
 import { GAME_LIST_OPTIONS } from '../constants/filter'
+import { preventDef } from '../services/preventDefault'
+export function Filter({ filter, setFilter, search, setSearch, getGames }) {
+  const isEnterPressed = useRef(false)
 
-export function Filter({ filter, setFilter }) {
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !isEnterPressed.current) {
+      getGames({ search })
+      isEnterPressed.current = true
+    }
+  }
+
+  const handleKeyUp = (e) => {
+    if (e.key === 'Enter' && isEnterPressed.current) {
+      isEnterPressed.current = false
+    }
+  }
+
   return (
     <nav className="filter">
       <div className="filter-search">
-        <form action="">
-          <input type="text" placeholder="Minecraft, Tetris, Half Life..." />
+        <form onSubmit={preventDef} action="">
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onKeyUp={handleKeyUp}
+            type="text"
+            placeholder="Minecraft, Tetris, Half Life..."
+          />
           <div className="filter-lines">
             <div className="filter-line"> </div>
             <div className="filter-line-two"> </div>

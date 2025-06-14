@@ -10,7 +10,8 @@ import { GAME_LIST_OPTIONS } from './constants/filter'
 function App() {
   const [filter, setFilter] = useState('all')
   const isAllSection = useRef(true)
-  const { isLoading, allGamesList } = useGames()
+  const [search, setSearch] = useState('')
+  const { isLoading, allGamesList, getGames } = useGames({ search })
 
   const {
     newList: favoritesList,
@@ -48,7 +49,14 @@ function App() {
       <Header />
 
       <main>
-        <Filter filter={filter} setFilter={setFilter} />
+        <Filter
+          filter={filter}
+          setFilter={setFilter}
+          search={search}
+          setSearch={setSearch}
+          getGames={getGames}
+        />
+
         {isLoading ? (
           <p>loading...</p>
         ) : (

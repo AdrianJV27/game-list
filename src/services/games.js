@@ -1,9 +1,9 @@
 const API_KEY = '1658013d112e4cfd8f2b2e6a4e799466'
 
-export async function getGames() {
+export async function getGames({ search }) {
   try {
     const response = await fetch(
-      `https://api.rawg.io/api/games?key=${API_KEY}&page=1`
+      `https://api.rawg.io/api/games?key=${API_KEY}&page=1&search=${search}`
     )
     const { results } = await response.json()
 
