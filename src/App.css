@@ -48,7 +48,6 @@ header h1 {
 }
 
 .card-image {
-  height: 260px;
   padding: 5px;
   border-radius: 15px;
   display: flex;
