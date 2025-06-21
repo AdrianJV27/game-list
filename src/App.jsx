@@ -1,7 +1,7 @@
 import './App.css'
 import { Header } from './components/Header'
 import { CardSection } from './components/CardSection'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Filter } from './components/Filter'
 import { useNewList } from './hooks/useNewList'
 import { usePersistantList } from './hooks/usePersistantList'
@@ -12,6 +12,26 @@ function App() {
   const isAllSection = useRef(true)
   const [search, setSearch] = useState('')
   const { isLoading, allGamesList, getGames } = useGames({ search })
+  const pageRef = useRef(1)
+  useEffect(() => {
+    const scrollDetect = () => {
+      console.log(isLoading)
+
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+        isAllSection.current &&
+        !isLoading
+      ) {
+        const page = ++pageRef.current
+        getGames({ search, page })
+      }
+    }
+    document.addEventListener('scroll', scrollDetect)
+
+    return () => {
+      document.removeEventListener('scroll', scrollDetect)
+    }
+  }, [isLoading])
 
   const {
     newList: favoritesList,
@@ -57,18 +77,15 @@ function App() {
           getGames={getGames}
         />
 
-        {isLoading ? (
-          <p>loading...</p>
-        ) : (
-          <CardSection
-            gameList={gameList}
-            isAllSection={isAllSection}
-            toggleFavorites={toggleFavorites}
-            togglePlayed={togglePlayed}
-            isInPlayed={isInPlayed}
-            isInFavorites={isInFavorites}
-          />
-        )}
+        <CardSection
+          gameList={gameList}
+          isAllSection={isAllSection}
+          toggleFavorites={toggleFavorites}
+          togglePlayed={togglePlayed}
+          isInPlayed={isInPlayed}
+          isInFavorites={isInFavorites}
+        />
+        {isLoading && <p>loading...</p>}
       </main>
     </>
   )

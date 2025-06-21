@@ -7,6 +7,7 @@ export function Filter({ filter, setFilter, search, setSearch, getGames }) {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !isEnterPressed.current) {
       getGames({ search })
+      setFilter(GAME_LIST_OPTIONS.ALL)
       isEnterPressed.current = true
     }
   }
